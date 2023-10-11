@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import '../styles/main.css';
 import Horoscope from './horoscope';
 import horoscope from '../data/horoscope.json';
+import { useDataContext } from '../pages/DataContext';
 
 function Main() {
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const {currentIndex, setCurrentIndex} = useDataContext();
 
     const handleLeftArrowClick = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + horoscope.length) % horoscope.length);
+        setCurrentIndex(currentIndex > 0 ? currentIndex - 1 : horoscope.length - 1);
     };
 
     const handleRightArrowClick = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % horoscope.length);
+        setCurrentIndex(currentIndex < horoscope.length - 1 ? currentIndex + 1 : 0);
     };
 
     return (
@@ -19,12 +20,12 @@ function Main() {
             <section>
                 <div>
                     <a className="left-horoscope" href="#" onClick={handleLeftArrowClick}>
-                        {horoscope[(currentIndex - 1 + horoscope.length) % horoscope.length].signe}
-                        <span>{horoscope[(currentIndex - 1 + horoscope.length) % horoscope.length].date}</span>
+                        {horoscope[currentIndex > 0 ? currentIndex - 1 : horoscope.length - 1]?.signe}
+                        <span>{horoscope[currentIndex > 0 ? currentIndex - 1 : horoscope.length - 1]?.date}</span>
                     </a>
                     <a className="right-horoscope" href="#" onClick={handleRightArrowClick}>
-                        {horoscope[(currentIndex + 1) % horoscope.length].signe}
-                        <span>{horoscope[(currentIndex + 1) % horoscope.length].date}</span>
+                    {horoscope[currentIndex < horoscope.length - 1 ? currentIndex + 1 : 0]?.signe}
+                        <span>{horoscope[currentIndex < horoscope.length - 1 ? currentIndex + 1 : 0]?.date}</span>
                     </a>
                 </div>
 

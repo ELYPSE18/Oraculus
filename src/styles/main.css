@@ -1,6 +1,4 @@
-body {
-    overflow: hidden;
-}
+
 
 /* Ajoutez le reste de votre CSS ici */
 main {
@@ -9,8 +7,7 @@ main {
     position: absolute;
     display: grid;
     grid-template-columns: 60% auto;
-    max-width: 1440px;
-    margin: 0 auto;
+   
 }
 
 aside {
